@@ -121,6 +121,7 @@ qkd/
   attacks.py      intercept-resend, PNS, blinding, time-shift (+ calibration)
   telemetry.py    LIMITED vs FULL block-feature extraction
   keyrate.py      GLLP + decoy-state (Ma et al. 2005) key rates
+  finitekey.py    epsilon-secure finite-key length (Lim et al. 2014)
   infometrics.py  Gaussian KL detectability + Stein floor        [SCATTER]
   sequential.py   CUSUM sequential detector                       [SCATTER]
   degeneracy.py   analytic gain-match + decoy residual            [DEGENERACY]

@@ -77,7 +77,10 @@ yields certified-but-compromised key:
 K_stolen(T) = N*_T · I · n_sift · r_cert     [bits]
 ```
 
-which grows without bound as the telemetry-limited detectability `D_T → 0`.
+which grows without bound as the telemetry-limited detectability `D_T → 0`. The
+certified rate can be taken either as the asymptotic decoy rate or as the
+composable ε-secure finite-key length of Lim et al. 2014 (`qkd/finitekey.py`),
+which approaches the asymptotic rate from below as the block length grows.
 
 ## Combined loopholes (`qkd/attacks.py::Composite`)
 
