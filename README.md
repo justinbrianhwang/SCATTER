@@ -155,6 +155,10 @@ PYTHONPATH=. python experiments/<name>.py
 | `exp_stolen_key.py` | certified-secret key stolen vs distance |
 | `exp_telemetry_budget.py` | greedy telemetry budget: which feature lifts the attack |
 | `exp_composite.py` | combined loopholes: detectability is sub-additive |
+| `exp_detectors.py` | LLR vs one-class SVM vs isolation forest ROC |
+| `exp_residual_map.py` | exact analytic decoy residual vs distance and decoy intensity |
+| `exp_finitekey_distance.py` | epsilon-secure finite-key rate vs distance (Lim 2014) |
+| `exp_clt.py` | telemetry Gaussianity (CLT validation) |
 | `smoke_attacks.py` | attack telemetry-signature sanity table |
 
 ## Installation
