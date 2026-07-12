@@ -89,6 +89,7 @@ def main():
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     path = os.path.join(OUT, "exp_detectors.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"D_lim={D_lim:.3f}  D_full={D_full:.3f}")
     print(f"saved -> {path}")
 

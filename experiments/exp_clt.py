@@ -68,6 +68,7 @@ def main() -> None:
 
     path = os.path.join(OUT, "exp_clt.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
 
     for name, s, k in rows:
         print(f"{name:14s} skew={s: .4f} excess_kurtosis={k: .4f}")

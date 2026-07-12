@@ -76,6 +76,7 @@ def main():
     fig.tight_layout()
     path = os.path.join(OUT, "exp_stein_validation.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"saved -> {path}")
 
 

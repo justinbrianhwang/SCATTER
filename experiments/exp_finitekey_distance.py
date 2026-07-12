@@ -102,6 +102,7 @@ def main() -> None:
 
     path = os.path.join(OUT, "exp_finitekey_distance.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
 
     for N in BLOCK_SIZES:
         print(f"N={N:.0e} cutoff distance: {cutoff_label(cutoffs[N])}")

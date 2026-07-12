@@ -111,6 +111,7 @@ def main():
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     path = os.path.join(OUT, "fig3_ml_ablation.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
 
     print(f"{'attack':22s} {'FULL auc':>9s} {'FULL det':>9s} "
           f"{'LIM auc':>9s} {'LIM det':>9s}")

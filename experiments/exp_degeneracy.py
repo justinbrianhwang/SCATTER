@@ -84,6 +84,7 @@ def main():
     fig.tight_layout()
     path = os.path.join(OUT, "exp_degeneracy.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"optimum restore={r_opt:.3f}  D_lim={D_opt:.4f}  D_full={Df[imin]:.4f}  "
           f"I={I_opt:.3f}")
     print(f"N*_lim={stein_detection_blocks(D_opt,ALPHA):.1f}  "

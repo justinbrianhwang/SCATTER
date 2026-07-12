@@ -67,6 +67,7 @@ def main():
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     path = os.path.join(OUT, "exp_residual_map.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"residual at 25km, nu=0.1: {abs(decoy_residual(sys25, r25, 1.0, 0.1)):.2e}")
     print(f"optimal decoy intensity nu* = {nu_star:.3f}")
     print(f"saved -> {path}")

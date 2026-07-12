@@ -87,6 +87,7 @@ def main() -> None:
 
     path = os.path.join(OUT, "fig1_decoy.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"no-decoy secure range : {L_nodecoy:.0f} km")
     print(f"decoy    secure range : {L_decoy:.0f} km")
     print(f"recovered             : +{L_decoy - L_nodecoy:.0f} km")

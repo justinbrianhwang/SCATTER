@@ -73,6 +73,7 @@ def main():
     fig.tight_layout()
     path = os.path.join(OUT, "exp_telemetry_budget.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
 
     for X, name in [(X1, "1-knob"), (X2, "2-knob")]:
         order, curve = greedy_budget(Xh, X, len(FULL_FEATURES))

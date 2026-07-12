@@ -65,6 +65,7 @@ def main():
     fig.tight_layout()
     path = os.path.join(OUT, "exp_fingerprint.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"analytic r*={r:.4f}  analytic decoy residual={Delta:+.5f}")
     print(f"max LIMITED deviation = {devs[:NLIM].max():.2f} sigma")
     print(f"decoy   deviation     = {devs[idc]:.2f} sigma")

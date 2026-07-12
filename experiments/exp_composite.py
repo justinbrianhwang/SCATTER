@@ -91,6 +91,7 @@ def main():
     fig.tight_layout(rect=(0, 0, 1, 0.94))
     path = os.path.join(OUT, "exp_composite.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"\nsaved -> {path}")
 
 

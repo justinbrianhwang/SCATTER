@@ -66,6 +66,7 @@ def main():
     fig.tight_layout()
     path = os.path.join(OUT, "fig2_qber_blind.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
     print(f"saved -> {path}")
     for name, atk, *_ in specs:
         pass

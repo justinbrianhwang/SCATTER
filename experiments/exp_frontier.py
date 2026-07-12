@@ -134,6 +134,7 @@ def main():
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     path = os.path.join(OUT, "exp_frontier.png")
     fig.savefig(path, dpi=150)
+    fig.savefig(path[:-4] + ".pdf")  # vector version for the paper
 
     print(f"{'family':11s} {'rho':>5s} {'I':>7s} {'D_lim':>9s} {'D_full':>9s} "
           f"{'N*_lim':>8s} {'N*_full':>8s}")
