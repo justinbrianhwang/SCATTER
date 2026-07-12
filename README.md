@@ -90,6 +90,19 @@ DEGENERACY attack steal 3–6× more *certified-secret* key before detection, ac
 
 ![Stolen certified-secret key](figures/exp_stolen_key.png)
 
+**How much telemetry is enough?** Greedily adding features shows the 1-knob
+attack is lifted out of degeneracy by a single decoy-gain residual, while the
+2-knob attack resists the entire feature set — no observable catches it quickly.
+
+![Telemetry budget](figures/exp_telemetry_budget.png)
+
+**Combined loopholes are sub-additive.** On a receiver with detector-efficiency
+mismatch, a composite of PNS and time-shift leaks the sum of their information at
+roughly the detectability of the stealthier one alone — 57 % below the additive
+detection budget a defender would assume.
+
+![Composite loophole](figures/exp_composite.png)
+
 **Physics validation.** The simulator reproduces the textbook decoy-state result
 (no-decoy PNS key rate collapses at ~63 km; decoy-state extends secure range to
 ~173 km), certifying the analytic layer.
@@ -111,6 +124,7 @@ qkd/
   infometrics.py  Gaussian KL detectability + Stein floor        [SCATTER]
   sequential.py   CUSUM sequential detector                       [SCATTER]
   degeneracy.py   analytic gain-match + decoy residual            [DEGENERACY]
+  subset.py       KL on feature subsets + greedy telemetry budget
   adversary.py    adversarial D_lim minimisation
   security.py     finite-key certified-but-stolen ledger
   dataset.py      block dataset generation
@@ -138,6 +152,8 @@ PYTHONPATH=. python experiments/<name>.py
 | `exp_degeneracy.py` | the degeneracy valley |
 | `exp_fingerprint.py` | per-feature degeneracy fingerprint |
 | `exp_stolen_key.py` | certified-secret key stolen vs distance |
+| `exp_telemetry_budget.py` | greedy telemetry budget: which feature lifts the attack |
+| `exp_composite.py` | combined loopholes: detectability is sub-additive |
 | `smoke_attacks.py` | attack telemetry-signature sanity table |
 
 ## Installation

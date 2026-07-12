@@ -23,6 +23,25 @@ class Attack:
         raise NotImplementedError
 
 
+class Composite(Attack):
+    """Apply several attacks to the same block, exploiting multiple device
+    imperfections at once. Because each sub-attack perturbs a different part of
+    the telemetry, the composite detectability is generally sub-additive:
+    D(composite) < sum of the individual D's -- a defender who budgets detection
+    per-imperfection underestimates the blind spot (the "combined loophole"
+    effect). Sub-attacks mutate the shared context in sequence.
+    """
+    name = "composite"
+
+    def __init__(self, attacks: list):
+        super().__init__(1.0)
+        self.attacks = attacks
+
+    def apply(self, ctx, session, rng) -> None:
+        for a in self.attacks:
+            a.apply(ctx, session, rng)
+
+
 class InterceptResend(Attack):
     """Intercept-resend on a fraction ``strength`` of pulses.
 

@@ -90,6 +90,40 @@ def test_degeneracy_two_knob_stealthier_in_full():
     assert D2l <= D2 + 1e-9                    # DPI
 
 
+def test_subset_kl_monotone():
+    # Adding a feature cannot decrease KL (KL is monotone under refinement).
+    from qkd.subset import kl_on_subset
+    sys = build_system(25.0)
+    rng = np.random.default_rng(4)
+    r, m = gain_match(sys)
+    Xh = generate(sys, const(None), 400, 20000, rng, FULL_FEATURES).X
+    Xa = generate(sys, const(PNS(1.0, restore=r, multi_forward=m)),
+                  400, 20000, rng, FULL_FEATURES).X
+    d1 = kl_on_subset(Xh, Xa, [0, 1])
+    d2 = kl_on_subset(Xh, Xa, [0, 1, 8])      # add decoy-gain residual
+    assert d2 >= d1 - 1e-9
+
+
+def test_composite_subadditive():
+    # Composite detectability is below the additive (naive) budget.
+    from qkd.attacks import Composite, TimeShift
+    sys = build_system(25.0, eta_mismatch=0.12)
+    rng = np.random.default_rng(5)
+    r, m = gain_match(sys)
+    Xh = generate(sys, const(None), 500, 20000, rng, FULL_FEATURES).X
+    P0 = fit_gaussian(Xh)
+
+    def D(fac):
+        return kl_gaussian(
+            fit_gaussian(generate(sys, fac, 500, 20000, rng, FULL_FEATURES).X), P0)
+
+    pns = PNS(1.0, restore=r, multi_forward=m)
+    Dp = D(const(PNS(1.0, restore=r, multi_forward=m)))
+    Dt = D(const(TimeShift(0.10)))
+    Dc = D(const(Composite([PNS(1.0, restore=r, multi_forward=m), TimeShift(0.10)])))
+    assert Dc < Dp + Dt                       # sub-additive
+
+
 def test_security_ledger_scales_with_delay():
     sys = build_system(25.0)
     a = ledger(sys, I=0.3, N_star=10, n_pulses=20000)

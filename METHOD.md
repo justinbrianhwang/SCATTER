@@ -34,7 +34,7 @@ Two theorems carry the analysis:
 
 - **LIMITED** (7 features, raw clicks only, no decoy analysis): gain, QBER,
   double-click rate, detector imbalance, Z/X basis asymmetry, timing mean & std.
-- **FULL** (13): LIMITED + per-intensity decoy residuals + timing skew/kurtosis.
+- **FULL** (14): LIMITED + per-intensity decoy residuals + timing skew/kurtosis.
 
 ## DEGENERACY attack — the adversary
 
@@ -78,3 +78,16 @@ K_stolen(T) = N*_T · I · n_sift · r_cert     [bits]
 ```
 
 which grows without bound as the telemetry-limited detectability `D_T → 0`.
+
+## Combined loopholes (`qkd/attacks.py::Composite`)
+
+When several device imperfections coexist, an eavesdropper can exploit them
+jointly. Because each sub-attack perturbs a different part of the telemetry and
+inflates its variance, the composite detectability is **sub-additive**:
+`D(composite) < Σ_i D(attack_i)`. On a receiver with detector-efficiency
+mismatch, a PNS + time-shift composite leaks the sum of the individual
+information at ~57 % of the additive detection budget — so a defender who
+allocates detection resources per-imperfection underestimates the true blind
+spot. Greedy telemetry-budget selection (`qkd/subset.py`) further shows that a
+single decoy-gain residual lifts the 1-knob attack, whereas the 2-knob attack
+resists the entire 14-feature set.
